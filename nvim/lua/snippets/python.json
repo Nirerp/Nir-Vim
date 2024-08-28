@@ -1,0 +1,21 @@
+{
+	"fast start": {
+		"prefix": "comp",
+		"body": [
+			"lalala",
+			"second lalala"
+		],
+		"description": "python test",
+		"scope": "python"
+	},
+	"testing xche": {
+		"prefix": "xche",
+		"body": [
+			"lala",
+			" ${SELECTION:option1} # Option 1 description",
+			" ${SELECTION:option2} # Option 2 description"
+		],
+		"description": "python test with choices",
+		"scope": "python"
+	}
+}
