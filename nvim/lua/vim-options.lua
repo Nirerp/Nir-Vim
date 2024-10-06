@@ -8,6 +8,7 @@ local opt = vim.opt -- for conciseness
 
 ------------------
 --------------------
+
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line
 

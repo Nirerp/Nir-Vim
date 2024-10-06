@@ -13,9 +13,28 @@ end
 vim.opt.rtp:prepend(lazypath)
 --------
 
+-- ENVIROMENT VARIABLES LOAD --
+local function load_env()
+	local config_dir = vim.fn.stdpath("config")
+	local env_file = io.open(config_dir .. "/.env", "r")
+	if env_file then
+		for line in env_file:lines() do
+			local key, value = line:match("^(%w+)%s*=%s*(.+)$")
+			if key and value then
+				vim.fn.setenv(key, value)
+			end
+		end
+		env_file:close()
+	end
+end
+load_env()
+
+--
+--
+
 -- Load plugins and configurations
 require("vim-options")
-require('keymaps')
+require("keymaps")
 require("lazy").setup("plugins")
 require("compiler")
 require("python_snippets")
