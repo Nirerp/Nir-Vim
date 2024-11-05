@@ -12,5 +12,5 @@ Ubuntu:
 ```
 git clone https://github.com/Nirerp/Nir-Vim.git &
 cd Nir-Vim &
-.install_nirvim.sh
+. install_nirvim.sh
 ```
