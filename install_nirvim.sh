@@ -18,7 +18,7 @@ sudo apt install python3-ruff
 
 
 ######## install nvim ########
-sudo snap install nvim --classic
+sudo snap install nvim --classic --edge
 ##############################
 
 
@@ -34,10 +34,10 @@ sudo install lazygit /usr/local/bin
 
 
 ######## Install Fonts:#######
-mkdir -p /usr/share/fonts/JetBrainsMono/
+mkdir -p /usr/share/fonts/CaskaydiaCoveNerdFont
 
 # Download URL for JetBrains Mono Nerd Font
-font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip"
+font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip"
 
 # Extract filename from URL
 filename="${font_url##*/}"
@@ -46,12 +46,12 @@ filename="${font_url##*/}"
 wget "$font_url" -O "$filename"
 
 if [ $? -eq 0 ]; then
-    echo "JetBrains Mono Nerd Font downloaded successfully: $filename"
+    echo "CaskaydiaCove Nerd Font downloaded successfully: $filename"
 else
-    echo "Error downloading JetBrains Mono Nerd Font."
+    echo "Error downloading CaskaydiaCove Nerd Font."
 fi
 
-sudo unzip JetBrainsMono.zip -d /usr/share/fonts/JetBrainsMono
+sudo unzip JetBrainsMono.zip -d /usr/share/fonts/CaskaydiaCoveNerdFont
 sudo fc-cache -fv
 #################################
 
