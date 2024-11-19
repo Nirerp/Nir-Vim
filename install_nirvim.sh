@@ -51,7 +51,7 @@ else
     echo "Error downloading CaskaydiaCove Nerd Font."
 fi
 
-sudo unzip JetBrainsMono.zip -d /usr/share/fonts/CaskaydiaCoveNerdFont
+sudo unzip CascadiaMono.zip -d /usr/share/fonts/CaskaydiaCoveNerdFont
 sudo fc-cache -fv
 #################################
 
