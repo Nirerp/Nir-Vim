@@ -34,7 +34,7 @@ sudo install lazygit /usr/local/bin
 
 
 ######## Install Fonts:#######
-mkdir -p /usr/share/fonts/CaskaydiaCoveNerdFont
+sudo mkdir -p /usr/share/fonts/CaskaydiaCoveNerdFont
 
 # Download URL for JetBrains Mono Nerd Font
 font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip"
@@ -51,7 +51,7 @@ else
     echo "Error downloading CaskaydiaCove Nerd Font."
 fi
 
-sudo unzip CascadiaMono.zip -d /usr/share/fonts/CaskaydiaCoveNerdFont
+sudo unzip CascadiaCode.zip -d /usr/share/fonts/CaskaydiaCoveNerdFont
 sudo fc-cache -fv
 #################################
 
