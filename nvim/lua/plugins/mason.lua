@@ -18,8 +18,8 @@ return {
 			ui = {
 				icons = {
 					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗",
+					package_pending = "...",
+					package_uninstalled = "",
 				},
 			},
 		})
@@ -27,7 +27,7 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"tailwindcss",
@@ -36,7 +36,7 @@ return {
 				"graphql",
 				"emmet_ls",
 				"prismals",
-				"basedpyright",
+				"pyright", -- fixed here
 				"clangd",
 			},
 		})
