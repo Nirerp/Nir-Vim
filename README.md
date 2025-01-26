@@ -107,8 +107,8 @@ ls.add_snippets("python", {
 
 ## Screenshots and Demo
 
-![Nir-Vim Home](path/to/screenshot1.png)
-![Nir-Vim in Action](path/to/screenshot2.png)
+![Nir-Vim Home](assets/nir-vim1.png)
+![Nir-Vim in Action](assets/nir-vim2.png)
 
 ### Demo Video
 
