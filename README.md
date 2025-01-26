@@ -81,6 +81,7 @@ The script will handle everything from installing dependencies to setting up Nir
 ## Key Bindings
 
 - `Leader = Space`: Opens [WhichKey](https://github.com/folke/which-key.nvim) to display all key mappings.
+- `Compiler = <F6>`: Opens up a Toggle-Term and runs the current script you're coding.
 
 ---
 
