@@ -111,6 +111,13 @@ ls.add_snippets("python", {
 ![Nir-Vim Home](assets/nir-vim1.png)
 ![Nir-Vim in Action](assets/nir-vim2.png)
 
+### Snippet Examples:
+![Nir-Vim in Action](assets/nir-vim-snippet.png)
+
+
+
+
+
 ### Demo Video
 
 [![Watch the demo](path/to/video-thumbnail.png)](path/to/demo.mp4)
