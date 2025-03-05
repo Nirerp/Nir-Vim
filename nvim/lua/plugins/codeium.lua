@@ -24,19 +24,22 @@ return {
         
         -- Create commands to enable, disable, and toggle Codeium
         vim.api.nvim_create_user_command("CodeiumEnable", function()
-            require("codeium.config").options.virtual_text.enabled = true
+            -- Set manual mode to false to enable automatic suggestions
+            require("codeium.config").options.virtual_text.manual = false
             vim.notify("Codeium enabled", vim.log.levels.INFO)
         end, {})
         
         vim.api.nvim_create_user_command("CodeiumDisable", function()
-            require("codeium.config").options.virtual_text.enabled = false
+            -- Set manual mode to true to disable automatic suggestions
+            require("codeium.config").options.virtual_text.manual = true
             vim.notify("Codeium disabled", vim.log.levels.INFO)
         end, {})
         
         vim.api.nvim_create_user_command("CodeiumToggle", function()
             local virtual_text = require("codeium.config").options.virtual_text
-            virtual_text.enabled = not virtual_text.enabled
-            vim.notify("Codeium " .. (virtual_text.enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+            -- Toggle manual mode to enable/disable automatic suggestions
+            virtual_text.manual = not virtual_text.manual
+            vim.notify("Codeium " .. (virtual_text.manual and "disabled" or "enabled"), vim.log.levels.INFO)
         end, {})
     end,
 }
