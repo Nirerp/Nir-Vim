@@ -37,6 +37,7 @@ return {
 				"emmet_ls",
 				"prismals",
 				"pyright", -- fixed here
+				"gopls", -- golang language server
 				"clangd",
 			},
 		})
@@ -49,6 +50,9 @@ return {
 				"ruff", -- python formatter
 				"black", -- python formatter
 				"clang-format", -- c and cpp formatter
+				"gofumpt", -- go formatter
+				"goimports", -- go imports formatter
+				"golangci-lint", -- go linter
 				"pylint", -- python linter
 				"eslint_d", -- js linter
 			},
