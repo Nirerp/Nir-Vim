@@ -20,12 +20,14 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black", "ruff" },
+				go = { "gofumpt", "goimports" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
+				
 				timeout_ms = 1000,
 			},
 		})
