@@ -11,6 +11,7 @@ return {
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
 			python = { "pylint" },
+			-- go = { "golangci-lint" }, -- Temporarily disabled until golangci-lint is installed
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -78,6 +79,21 @@ return {
 						severity = vim.diagnostic.severity[error.severity:upper()] or vim.diagnostic.severity.ERROR,
 						message = error.message,
 						source = "pylint",
+					})
+				end
+				vim.diagnostic.set(vim.diagnostic.get_namespace(bufnr), bufnr, diagnostics)
+			end,
+			["golangci-lint"] = function(errors, bufnr)
+				local diagnostics = {}
+				for _, error in ipairs(errors) do
+					table.insert(diagnostics, {
+						lnum = error.line - 1,
+						col = error.col - 1,
+						end_lnum = error.endLine and error.endLine - 1 or error.line - 1,
+						end_col = error.endColumn or error.col,
+						severity = vim.diagnostic.severity[error.severity:upper()] or vim.diagnostic.severity.ERROR,
+						message = error.message,
+						source = "golangci-lint",
 					})
 				end
 				vim.diagnostic.set(vim.diagnostic.get_namespace(bufnr), bufnr, diagnostics)
