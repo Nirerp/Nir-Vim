@@ -133,7 +133,7 @@ return {
 					},
 				})
 			end,
-			["pyright"] = function() -- Fixed here
+			["pyright"] = function() 
 				lspconfig["pyright"].setup({
 					capabilities = capabilities,
 					settings = {
@@ -147,6 +147,20 @@ return {
 									enabled = false,
 								},
 							},
+						},
+					},
+				})
+			end,
+			["gopls"] = function()
+				lspconfig["gopls"].setup({
+					capabilities = capabilities,
+					settings = {
+						gopls = {
+							analyses = {
+								unusedparams = true,
+							},
+							staticcheck = true,
+							gofumpt = true,
 						},
 					},
 				})
