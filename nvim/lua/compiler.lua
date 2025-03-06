@@ -1,6 +1,5 @@
 local Terminal = require("toggleterm.terminal").Terminal
 
-
 -- Function to run the current Python file in a floating terminal
 function _G.run_python_file()
 	local file = vim.fn.expand("%:p") -- Get the absolute path of the current file
@@ -31,8 +30,24 @@ function _G.run_c_file()
 	end
 end
 
--- Function to run current Cpp file in floating window
+-- Function to run the current Golang (.go) file in a floating terminal
+function _G.run_go_file()
+	local file = vim.fn.expand("%:p") -- Get the absolute path of the current file
+	if vim.fn.filereadable(file) == 1 then
+		local go_terminal = Terminal:new({
+			cmd = "go run " .. file,
+			direction = "float",
+			close_on_exit = false, -- Keep the terminal open after the command finishes
+		})
+		go_terminal:toggle()
+	else
+		print("File does not exist or is not readable: " .. file)
+	end
+end
 
+
+
+-- Function to run current Cpp file in floating window
 
 -- Function to run the current html file in a live-server
 function _G.run_html_file()
@@ -60,6 +75,8 @@ function _G.run_file()
 			run_c_file(file)
 		elseif ext == "html" then
 			run_html_file(file)
+		elseif ext == "go" then
+			run_go_file(file)
 		else
 			print("Unsupported file type: " .. ext)
 		end
