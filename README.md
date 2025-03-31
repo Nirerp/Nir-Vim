@@ -120,7 +120,7 @@ ls.add_snippets("python", {
 
 ### Demo Video
 
-[![Watch the demo](path/to/video-thumbnail.png)](path/to/demo.mp4)
+[![Watch the demo](path/to/video-thumbnail.png)](assets/demo.mp4)
 
 ---
 
