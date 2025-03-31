@@ -19,7 +19,7 @@ return {
 				graphql = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black", "ruff" },
+				python = { "ruff_format" }, -- Changed from "isort", "black", "ruff" to just "ruff_format"
 				go = { "gofumpt", "goimports" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
