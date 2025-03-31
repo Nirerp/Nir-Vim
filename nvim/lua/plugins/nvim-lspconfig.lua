@@ -151,6 +151,28 @@ return {
 					},
 				})
 			end,
+			 ["ruff"] = function()
+				lspconfig["ruff"].setup({  -- Change from "ruff_lsp" to "ruff"
+					capabilities = capabilities,
+					on_attach = function(client, _)
+						-- Disable hover in favor of Pyright's hover
+						client.server_capabilities.hoverProvider = false
+					end,
+					init_options = {
+						settings = {
+							-- Configure Ruff settings
+							format = {
+								-- Enable formatter
+								enabled = true,
+							},
+							lint = {
+								-- Run Ruff automatically on file save
+								run = "onSave",
+							},
+						}
+					}
+				})
+			end,
 			["gopls"] = function()
 				lspconfig["gopls"].setup({
 					capabilities = capabilities,
