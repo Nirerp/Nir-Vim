@@ -10,7 +10,8 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
-			python = { "pylint" },
+			-- python = { "pylint" }, -- use if you disable ruff
+			python = { "ruff" }, -- Use ruff for linting
 			-- go = { "golangci-lint" }, -- Temporarily disabled until golangci-lint is installed
 		}
 
