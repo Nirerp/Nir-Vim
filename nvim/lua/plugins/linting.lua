@@ -33,25 +33,33 @@ return {
 				severity = { min = vim.diagnostic.severity.WARN },
 				format = function(diagnostic)
 					if diagnostic.severity == vim.diagnostic.severity.ERROR then
-						return ""
+						return ""
 					elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-						return ""
+						return ""
 					else
 						return ""
 					end
 				end,
 			},
-			signs = true,
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = "",
+					[vim.diagnostic.severity.WARN] = "",
+					[vim.diagnostic.severity.HINT] = "󰋖",
+					[vim.diagnostic.severity.INFO] = "",
+				},
+				numhl = {},
+				texthl = {
+					[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+					[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+					[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+					[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+				},
+			},
 			underline = true,
 			update_in_insert = false,
 			severity_sort = true,
 		})
-
-		local signs = { Error = "", Warn = "", Hint = "󰋖", Info = "" }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
 
 		lint.handlers = {
 			["eslint_d"] = function(errors, bufnr)
