@@ -36,9 +36,10 @@ return {
 				"graphql",
 				"emmet_ls",
 				"prismals",
-				"pyright", -- fixed here
+				"pyright",
 				"gopls", -- golang language server
 				"clangd",
+				"ruff",
 			},
 		})
 
@@ -46,14 +47,15 @@ return {
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"ruff", -- python formatter
-				"black", -- python formatter
+				"ruff", -- python linter and formatter
+				-- "isort", -- remove this if using ruff
+				-- "black", -- remove this if using ruff
+				-- "pylint", -- remove this if using ruff
+				"shellcheck", -- shell linter
 				"clang-format", -- c and cpp formatter
 				"gofumpt", -- go formatter
 				"goimports", -- go imports formatter
 				"golangci-lint", -- go linter
-				"pylint", -- python linter
 				"eslint_d", -- js linter
 			},
 		})
