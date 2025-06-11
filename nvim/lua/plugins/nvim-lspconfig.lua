@@ -5,6 +5,9 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
+		"williamboman/mason-lspconfig.nvim",
+		"nvim-tree/nvim-web-devicons",
+		"nvim-neo-tree/neo-tree.nvim",
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -71,141 +74,48 @@ return {
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
-		local signs = { Error = "", Warn = "", Hint = "󰠠", Info = "" }
+		local signs = { Error = "X", Warn = "", Hint = "󰋖", Info = "" }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		mason_lspconfig.setup_handlers({
-			-- default handler for installed servers
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
-			["svelte"] = function()
-				lspconfig["svelte"].setup({
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePost", {
-							pattern = { "*.js", "*.ts" },
-							callback = function(ctx)
-								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-							end,
-						})
-					end,
-				})
-			end,
-			["graphql"] = function()
-				lspconfig["graphql"].setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-			["emmet_ls"] = function()
-				lspconfig["emmet_ls"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"html",
-						"typescriptreact",
-						"javascriptreact",
-						"css",
-						"sass",
-						"scss",
-						"less",
-						"svelte",
-					},
-				})
-			end,
-			["lua_ls"] = function()
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
+		-- Configure LSP servers
+		local servers = {
+			-- Add your LSP servers here
+			jedi_language_server = {
+				settings = {
+					jedi = {
+						completion = {
+							enabled = true,
+						},
+						diagnostics = {
+							enable = true,
+						},
+						workspace = {
+							extraPaths = {},
 						},
 					},
-				})
-			end,
-			["pyright"] = function() 
-				lspconfig["pyright"].setup({
-					capabilities = capabilities,
-					settings = {
-						python = {
-							analysis = {
-								typeCheckingMode = "basic",
-								autoImportCompletions = true,
-								autoImportSuggestions = true,
-								diagnosticMode = "openFilesOnly",
-								diagnostics = {
-									enabled = false,
-								},
-							},
-						},
-					},
-				})
-			end,
-			 ["ruff"] = function()
-				lspconfig["ruff"].setup({  -- Change from "ruff_lsp" to "ruff"
-					capabilities = capabilities,
-					on_attach = function(client, _)
-						-- Disable hover in favor of Pyright's hover
-						client.server_capabilities.hoverProvider = false
-					end,
-					init_options = {
-						settings = {
-							-- Configure Ruff settings
-							format = {
-								-- Enable formatter
-								enabled = true,
-							},
-							lint = {
-								-- Run Ruff automatically on file save
-								run = "onSave",
-							},
-						}
-					}
-				})
-			end,
-			["gopls"] = function()
-				lspconfig["gopls"].setup({
-					capabilities = capabilities,
-					settings = {
-						gopls = {
-							analyses = {
-								unusedparams = true,
-							},
-							staticcheck = true,
-							gofumpt = true,
-						},
-					},
-				})
-			end,
-			["clangd"] = function()
-				lspconfig["clangd"].setup({
-					capabilities = capabilities,
-					cmd = { "clangd", "--background-index", "--clang-tidy" },
-					filetypes = { "c", "cpp", "objc", "objcpp" },
-					init_options = {
-						clangdFileStatus = true,
-						usePlaceholders = true,
-						completeUnimported = true,
-					},
-					settings = {
-						clangd = {
-							pathMappings = {},
-							compilationDatabaseDirectory = "build",
-							fallbackFlags = { "-std=c++17" },
-						},
-					},
-				})
-			end,
+				},
+				init_options = {
+					position_encoding = "utf-16",
+				},
+			},
+			-- Add other server configurations here
+		}
+
+		-- Setup mason-lspconfig
+		mason_lspconfig.setup({
+			ensure_installed = vim.tbl_keys(servers),
+			handlers = {
+				function(server_name)
+					local server = servers[server_name] or {}
+					server.capabilities = capabilities
+					lspconfig[server_name].setup(server)
+				end,
+			},
 		})
+
+		require('nvim-web-devicons').setup()
 	end,
 }
