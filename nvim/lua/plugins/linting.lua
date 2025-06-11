@@ -30,23 +30,22 @@ return {
 
 		vim.diagnostic.config({
 			virtual_text = {
-				severity = { min = vim.diagnostic.severity.WARN },
-				format = function(diagnostic)
-					if diagnostic.severity == vim.diagnostic.severity.ERROR then
-						return ""
-					elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-						return ""
-					else
-						return ""
-					end
+				prefix = function(diagnostic)
+					local icons = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN]  = "",
+						[vim.diagnostic.severity.HINT]  = "",
+						[vim.diagnostic.severity.INFO]  = "",
+					}
+					return icons[diagnostic.severity]
 				end,
 			},
 			signs = {
 				text = {
-					[vim.diagnostic.severity.ERROR] = "",
-					[vim.diagnostic.severity.WARN] = "",
-					[vim.diagnostic.severity.HINT] = "󰋖",
-					[vim.diagnostic.severity.INFO] = "",
+					[vim.diagnostic.severity.ERROR] = "",
+					[vim.diagnostic.severity.WARN] = "",
+					[vim.diagnostic.severity.HINT] = "",
+					[vim.diagnostic.severity.INFO] = "",
 				},
 				numhl = {},
 				texthl = {
