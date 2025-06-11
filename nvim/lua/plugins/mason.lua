@@ -36,7 +36,7 @@ return {
 				"graphql",
 				"emmet_ls",
 				"prismals",
-				"pyright",
+				"jedi_language_server",
 				"gopls", -- golang language server
 				"clangd",
 				"ruff",
