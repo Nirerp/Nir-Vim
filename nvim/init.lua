@@ -29,8 +29,7 @@ local function load_env()
 end
 load_env()
 
---
---
+
 
 -- Load plugins and configurations
 require("vim-options")
@@ -41,4 +40,15 @@ require("python_snippets")
 
 -- Set your colorscheme
 -- load the colorscheme here
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme duskfox]]) -- Change this to any of your installed colorschemes:
+-- cyberdream
+-- tokyonight
+-- catppuccin
+-- dracula
+-- onedark
+-- nightfox
+-- ayu
+-- vscode
+-- kanagawa
+-- duskfox
+-- etc...
