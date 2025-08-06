@@ -71,7 +71,28 @@ return function()
 
 	-- Configure LSP servers
 	local servers = {
-		-- Add your LSP servers here
+		"ts_ls",
+		"html",
+		"cssls",
+		"tailwindcss",
+		"svelte",
+		"lua_ls",
+		"graphql",
+		"emmet_ls",
+		"prismals",
+		"jedi_language_server",
+		"gopls",
+		"clangd",
+		"ruff_lsp", -- Corrected from "ruff"
+	}
+
+	-- Setup mason-lspconfig
+	mason_lspconfig.setup({
+		ensure_installed = servers,
+	})
+
+	-- Custom server configurations
+	local server_configs = {
 		jedi_language_server = {
 			settings = {
 				jedi = {
@@ -90,20 +111,22 @@ return function()
 				position_encoding = "utf-16",
 			},
 		},
+		ruff_lsp = {
+			init_options = {
+				settings = {
+					-- Any specific settings for ruff-lsp can go here
+				},
+			},
+		},
 		-- Add other server configurations here
 	}
 
-	-- Setup mason-lspconfig
-	mason_lspconfig.setup({
-		ensure_installed = vim.tbl_keys(servers),
-		handlers = {
-			function(server_name)
-				local server = servers[server_name] or {}
-				server.capabilities = capabilities
-				lspconfig[server_name].setup(server)
-			end,
-		},
-	})
+	-- Configure servers with nvim-lspconfig
+	for _, server_name in ipairs(servers) do
+		local server_config = server_configs[server_name] or {}
+		server_config.capabilities = capabilities
+		lspconfig[server_name].setup(server_config)
+	end
 
 	require('nvim-web-devicons').setup()
 end 

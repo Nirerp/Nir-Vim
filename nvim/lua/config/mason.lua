@@ -18,25 +18,6 @@ return function()
 		},
 	})
 
-	mason_lspconfig.setup({
-		-- list of servers for mason to install
-		ensure_installed = {
-			"ts_ls",
-			"html",
-			"cssls",
-			"tailwindcss",
-			"svelte",
-			"lua_ls",
-			"graphql",
-			"emmet_ls",
-			"prismals",
-			"jedi_language_server",
-			"gopls", -- golang language server
-			"clangd",
-			"ruff",
-		},
-	})
-
 	mason_tool_installer.setup({
 		ensure_installed = {
 			"prettier", -- prettier formatter
