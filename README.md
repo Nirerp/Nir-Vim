@@ -17,8 +17,59 @@ Nir-Vim is a blazing-fast Neovim configuration tailored for AI and Machine Learn
 
 ## 🚀 Installation
 
-### Automated Installation (Recommended)
-To simplify the setup process, Nir-Vim includes an installation script. Run the following commands to install all prerequisites and Nir-Vim:
+### Quick Start (Platform-Specific Scripts)
+
+Choose your operating system and run the corresponding installation script:
+
+#### 🐧 **Ubuntu/Debian**
+```bash
+git clone https://github.com/Nirerp/Nir-Vim.git
+cd Nir-Vim
+chmod +x scripts/debian_install.sh
+./scripts/debian_install.sh
+```
+
+#### 🍎 **macOS**
+```bash
+git clone https://github.com/Nirerp/Nir-Vim.git
+cd Nir-Vim
+chmod +x scripts/mac_install.sh
+./scripts/mac_install.sh
+```
+
+#### 🏛️ **Arch Linux**
+```bash
+git clone https://github.com/Nirerp/Nir-Vim.git
+cd Nir-Vim
+chmod +x scripts/arch_install.sh
+./scripts/arch_install.sh
+```
+
+These scripts will automatically:
+- Install all required dependencies (Neovim, Node.js, Python packages, etc.)
+- Install and configure a Nerd Font (CascadiaCode)
+- Install LazyGit for Git integration
+- Install live-server for web development
+- Backup your existing Neovim configuration
+- Set up Nir-Vim in `~/.config/nvim`
+
+The first time you start Neovim with `nvim`, Lazy.nvim will automatically install all plugins.
+
+#### What the Installation Scripts Do
+
+Each platform-specific script automatically handles:
+
+✅ **System Dependencies**: Installs Git, Node.js, npm, Python 3, and build tools  
+✅ **Neovim**: Installs the latest stable version of Neovim  
+✅ **Python Packages**: Installs pynvim, debugpy, isort, ruff, black, and pylint  
+✅ **LazyGit**: Installs LazyGit for seamless Git integration  
+✅ **Nerd Font**: Downloads and installs CascadiaCode Nerd Font  
+✅ **live-server**: Installs live-server globally for web development  
+✅ **Backup**: Safely backs up your existing Neovim configuration  
+✅ **Configuration**: Copies Nir-Vim configuration to `~/.config/nvim`  
+
+### Legacy Installation (Ubuntu/Debian only)
+For Ubuntu/Debian systems, you can also use the original installation script:
 
 ```bash
 git clone https://github.com/Nirerp/Nir-Vim.git
@@ -26,7 +77,6 @@ cd Nir-Vim
 chmod +x install_nirvim.sh
 ./install_nirvim.sh
 ```
-The script will handle everything from installing dependencies to setting up Nir-Vim on your system. The first time you start Neovim, Lazy.nvim will automatically install all the plugins.
 
 ### Manual Installation
 <details>
@@ -34,47 +84,98 @@ The script will handle everything from installing dependencies to setting up Nir
 
 If you prefer to install the dependencies manually, follow the steps below for your distribution.
 
-#### 1. Install Core Dependencies
--   **Debian/Ubuntu:**
-    ```bash
-    sudo apt update && sudo apt install -y git nodejs npm python3 python3-venv
-    ```
--   **Arch Linux:**
-    ```bash
-    sudo pacman -Syu --noconfirm git nodejs npm python python-pip
-    ```
--   **Fedora/CentOS:**
-    ```bash
-    sudo dnf check-update && sudo dnf install -y git nodejs npm python3 python3-pip
-    ```
+#### Prerequisites
+All platforms require:
+- **Git** (for cloning repositories)
+- **Node.js & npm** (v16+ recommended)
+- **Python 3** (v3.8+ with pip)
+- **Neovim** (v0.9.5+)
+- **A Nerd Font** (for proper icon rendering)
+- **LazyGit** (for Git integration)
 
-#### 2. Install Neovim (v0.9.5+)
-It is highly recommended to install the latest stable version. Please follow the official [Neovim installation instructions](https://github.com/neovim/neovim/wiki/Installing-Neovim) for the most up-to-date method.
+#### Platform-Specific Instructions
 
-#### 3. Install a Nerd Font
-A Nerd Font is required for icons to render correctly.
-1.  Go to the [Nerd Fonts website](https://www.nerdfonts.com/font-downloads).
-2.  Download a font of your choice (e.g., FiraCode, JetBrains Mono, Hack).
-3.  Install the font on your system and configure your terminal emulator to use it.
-
-#### 4. Install Additional Tools
--   **LazyGit**: Follow the installation instructions on the [LazyGit repository](https://github.com/jesseduffield/lazygit#installation).
--   **live-server** (for web development):
-    ```bash
-    sudo npm install -g live-server
-    ```
-
-#### 5. Clone the Nir-Vim Repository
-Once all dependencies are installed, clone the Nir-Vim configuration:
+##### 🐧 **Ubuntu/Debian**
 ```bash
-# First, backup your existing Neovim configuration
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
+# Update package list
+sudo apt update
 
-# Then, clone the repository
-git clone https://github.com/Nirerp/Nir-Vim.git ~/.config/nvim
+# Install core dependencies
+sudo apt install -y git nodejs npm python3 python3-pip python3-venv curl wget unzip
+
+# Install Neovim (latest stable)
+sudo snap install nvim --classic
+
+# Install Python packages
+pip3 install --user pynvim debugpy isort ruff black pylint
+
+# Install LazyGit
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+
+# Install live-server
+sudo npm install -g live-server
 ```
-The next time you start Neovim with `nvim`, all plugins will be installed automatically.
+
+##### 🍎 **macOS**
+```bash
+# Install Homebrew (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install dependencies
+brew install git node python3 neovim lazygit
+
+# Install Python packages
+pip3 install --user pynvim debugpy isort ruff black pylint
+
+# Install live-server
+npm install -g live-server
+```
+
+##### 🏛️ **Arch Linux**
+```bash
+# Update system
+sudo pacman -Syu
+
+# Install core dependencies
+sudo pacman -S --noconfirm git nodejs npm python python-pip neovim base-devel
+
+# Install Python packages (prefer pacman when available)
+sudo pacman -S --noconfirm python-pynvim python-isort python-black python-pylint
+pip install --user debugpy ruff
+
+# Install LazyGit (using AUR helper like yay)
+yay -S lazygit
+# Or install manually if no AUR helper available
+
+# Install live-server
+sudo npm install -g live-server
+```
+
+#### Install a Nerd Font
+A Nerd Font is required for icons to render correctly:
+
+- **Ubuntu/Debian**: Download and install manually from [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
+- **macOS**: `brew install --cask font-cascadia-code-nerd-font`
+- **Arch Linux**: `sudo pacman -S ttf-cascadia-code-nerd` or install from AUR
+
+#### Final Setup
+```bash
+# Backup existing Neovim configuration
+mv ~/.config/nvim ~/.config/nvim.backup.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
+mv ~/.local/share/nvim ~/.local/share/nvim.backup.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
+
+# Clone Nir-Vim configuration
+git clone https://github.com/Nirerp/Nir-Vim.git
+cp -r Nir-Vim/nvim ~/.config/
+
+# Start Neovim to trigger plugin installation
+nvim
+```
+
+The first time you start Neovim, Lazy.nvim will automatically install all plugins.
 
 </details>
 
@@ -140,6 +241,46 @@ Here is a curated list of plugins included in this configuration, grouped by fun
 | [dressing.nvim](https://github.com/stevearc/dressing.nvim) | A plugin to improve the default `vim.ui` interfaces.                 |
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Adds indentation guides with highlighting.                     |
 | *Multiple Themes*                                             | Includes Dracula, Ayu, Catppuccin, and more for easy customization. |
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Script Permission Denied**
+```bash
+chmod +x scripts/<platform>_install.sh
+```
+
+**Neovim Not Found After Installation**
+- Restart your terminal
+- Check if Neovim is in your PATH: `which nvim`
+- On Ubuntu/Debian: Try `sudo snap refresh nvim`
+
+**Icons Not Displaying Correctly**
+- Ensure your terminal is using a Nerd Font
+- Restart your terminal after font installation
+- Check terminal font settings
+
+**Plugin Installation Fails**
+- Ensure you have internet connection
+- Run `:Lazy sync` inside Neovim to retry
+- Check `:checkhealth` for missing dependencies
+
+**Python LSP Issues**
+- Ensure Python packages are installed: `pip3 list | grep pynvim`
+- Run `:Mason` to check LSP server status
+- Try `:LspRestart` if servers aren't working
+
+### Environment Variables (Optional)
+
+Nir-Vim supports optional environment variables via a `.env` file:
+
+```bash
+# Copy the example file and customize
+cp ~/.config/nvim/.env.example ~/.config/nvim/.env
+# Edit with your preferred settings
+nvim ~/.config/nvim/.env
+```
 
 ---
 

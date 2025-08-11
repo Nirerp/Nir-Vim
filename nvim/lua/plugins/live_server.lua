@@ -1,12 +1,6 @@
 return {
-	{
-		'barrett-ruth/live-server.nvim',
-		config = function()
-			require('live-server').setup({
-				build = 'pnpm add -g live-server',
-				cmd = { 'LiveServerStart', 'LiveServerStop' },
-				config = true
-			})
-		end
-	}
+	"barrett-ruth/live-server.nvim",
+	build = "pnpm add -g live-server",
+	cmd = { "LiveServerStart", "LiveServerStop" },
+	config = require("config.live_server"),
 }

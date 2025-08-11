@@ -30,10 +30,11 @@ return function()
 			"graphql",
 			"emmet_ls",
 			"prismals",
-			"jedi_language_server",
+			-- "jedi_language_server", -- Removed to avoid conflicts with pyright
 			"gopls", -- golang language server
 			"clangd",
-			"ruff",
+			"pyright", -- Python LSP server
+			"terraformls", -- Terraform language server
 		},
 	})
 
@@ -41,16 +42,18 @@ return function()
 		ensure_installed = {
 			"prettier", -- prettier formatter
 			"stylua", -- lua formatter
-			"ruff", -- python linter and formatter
-			-- "isort", -- remove this if using ruff
-			-- "black", -- remove this if using ruff
-			-- "pylint", -- remove this if using ruff
+			"black", -- Python formatter
+			"isort", -- Python import sorter
+			"pylint", -- Python linter
 			"shellcheck", -- shell linter
 			"clang-format", -- c and cpp formatter
 			"gofumpt", -- go formatter
 			"goimports", -- go imports formatter
 			"golangci-lint", -- go linter
 			"eslint_d", -- js linter
+			"terraform-ls", -- Terraform language server
+			"tflint", -- Terraform linter
+			"tfsec", -- Terraform security scanner
 		},
 	})
 end 

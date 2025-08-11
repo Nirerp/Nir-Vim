@@ -62,6 +62,13 @@ return function()
 	-- used to enable autocompletion (assign to every lsp server config)
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
+	-- Add position encoding for Neovim v0.11+
+	-- Use the new approach for setting position encoding
+	if vim.fn.has("nvim-0.11") == 1 then
+		capabilities.textDocument = capabilities.textDocument or {}
+		capabilities.textDocument.positionEncoding = "utf-16"
+	end
+
 	-- Change the Diagnostic symbols in the sign column (gutter)
 	local signs = { Error = "X", Warn = "", Hint = "󰋖", Info = "" }
 	for type, icon in pairs(signs) do
@@ -72,22 +79,26 @@ return function()
 	-- Configure LSP servers
 	local servers = {
 		-- Add your LSP servers here
-		jedi_language_server = {
+		-- Using pyright instead of jedi_language_server to avoid conflicts
+		pyright = {
 			settings = {
-				jedi = {
-					completion = {
-						enabled = true,
-					},
-					diagnostics = {
-						enable = true,
-					},
-					workspace = {
-						extraPaths = {},
+				python = {
+					analysis = {
+						autoSearchPaths = true,
+						diagnosticMode = "workspace",
+						useLibraryCodeForTypes = true,
 					},
 				},
 			},
-			init_options = {
-				position_encoding = "utf-16",
+		},
+		-- Terraform language server
+		terraformls = {
+			settings = {
+				terraform = {
+					validation = {
+						enabled = true,
+					},
+				},
 			},
 		},
 		-- Add other server configurations here
